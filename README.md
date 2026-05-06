@@ -57,3 +57,11 @@ gh release create rmx2189-microg-v1 \
   --title "RMX2189 MicroG GSI" \
   --notes "Android 14 crDroid 10.13 tuned image for RMX2189"
 ```
+
+### One-command GitHub release
+
+```bash
+./scripts/release_github.sh rmx2189-microg-v1 <owner/repo> out/crdroid10-rmx2189-microg.img
+```
+
+This will push branch `work`, force-update the tag, and upload the IMG to a GitHub Release.
