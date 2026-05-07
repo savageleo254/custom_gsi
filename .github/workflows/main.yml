@@ -1,0 +1,52 @@
+name: Build and Release RMX2189 GSI
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag"
+        required: true
+        default: "rmx2189-microg-v1"
+      base_img_url:
+        description: "Direct URL to base crDroid .img.xz"
+        required: true
+        default: "https://github.com/naz664/crDroid_gsi/releases/download/v2025.03.08/crDroid-10.13-arm64_bvN-Unofficial.img.xz"
+
+permissions:
+  contents: write
+
+jobs:
+  build-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: work
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y android-sdk-libsparse-utils e2fsprogs xz-utils
+
+      - name: Fetch assets
+        run: |
+          python3 scripts/fetch_release_assets.py --out-dir downloads --base-img-url "${{ inputs.base_img_url }}"
+          xz -fdk downloads/crDroid-10.13-arm64_bvN-Unofficial.img.xz
+
+      - name: Build image
+        run: |
+          ./build_rmx2189_tuned.sh \
+            downloads/crDroid-10.13-arm64_bvN-Unofficial.img \
+            downloads/com.google.android.gms-250932030-hw.apk \
+            downloads/com.android.vending-84022630-hw.apk
+
+      - name: Compress output
+        run: xz -T0 -z -f out/crdroid10-rmx2189-microg.img
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ inputs.tag }}
+          files: out/crdroid10-rmx2189-microg.img.xz
+          make_latest: true
