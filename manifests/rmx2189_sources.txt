@@ -1,0 +1,9 @@
+# Core upstream sources to prepare raw materials for building RMX2189-tuned A14 image
+# Format: <git_url> <destination>
+
+https://github.com/crdroidandroid/android.git sources/crdroid/android
+https://github.com/microg/GmsCore.git sources/microg/GmsCore
+https://github.com/microg/android_packages_apps_GmsCore.git sources/microg/android_packages_apps_GmsCore
+https://github.com/microg/android_packages_apps_GsfProxy.git sources/microg/android_packages_apps_GsfProxy
+https://github.com/microg/android_packages_apps_FakeStore.git sources/microg/android_packages_apps_FakeStore
+https://github.com/microg/android_frameworks_opt_telephony.git sources/microg/android_frameworks_opt_telephony
