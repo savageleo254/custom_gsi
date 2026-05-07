@@ -65,3 +65,14 @@ gh release create rmx2189-microg-v1 \
 ```
 
 This will push branch `work`, force-update the tag, and upload the IMG to a GitHub Release.
+
+## Cloud Codex / GitHub-web publish (no local files needed)
+
+If you're using a web-only environment, run the GitHub Action instead of local upload:
+
+1. Push branch `work`.
+2. In GitHub: **Actions** → **Build and Release RMX2189 GSI** → **Run workflow**.
+3. Set:
+   - `tag` (e.g. `rmx2189-microg-v1`)
+   - `base_img_url` (direct `.img.xz` URL)
+4. Wait for workflow completion; it uploads `crdroid10-rmx2189-microg.img.xz` to Releases automatically.
