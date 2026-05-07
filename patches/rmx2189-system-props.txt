@@ -1,0 +1,27 @@
+# RMX2189 / MT6765 / kernel 4.9 tuned properties
+
+# MicroG / spoofing
+ro.microg.supported=1
+persist.sys.phh.signature_spoofing=true
+
+# RIL compatibility
+persist.sys.phh.radio.use_old_ril=true
+persist.sys.phh.radio.force_on_dc=true
+ro.telephony.ril_class=MTKRIL
+
+# MTK network stabilization
+persist.radio.multisim.config=none
+persist.radio.reset_on_switch=1
+persist.radio.data_ltd_sys_ind=1
+wifi.interface=wlan0
+persist.sys.wifi.supplicant_scan_interval=15
+
+# Disable unstable IMS paths
+persist.dbg.ims_volte_enable=0
+persist.dbg.volte_avail_ovr=0
+persist.dbg.vt_avail_ovr=0
+persist.dbg.wfc_avail_ovr=0
+
+# Kernel 4.9 compatibility workarounds
+persist.sys.phh.disable_vndk_check=true
+persist.sys.phh.disable_audio_effects=true
